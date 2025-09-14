@@ -1,0 +1,29 @@
+# Compiled Java classes
+*.class
+
+# Log files
+*.log
+
+# Eclipse files
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# VS Code
+.vscode/
+
+# Build directories
+target/
+build/
+bin/
+
+# MacOS
+.DS_Store
+__MACOSX/
+
+# Windows
