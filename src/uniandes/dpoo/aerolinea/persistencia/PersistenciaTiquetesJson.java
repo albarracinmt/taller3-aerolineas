@@ -96,7 +96,7 @@ public class PersistenciaTiquetesJson implements IPersistenciaTiquetes
                 // Al revisar el código de la clase ClienteNatural, no hay nada que tenga que ver con cargar o salvar.
                 // En este caso, la persistencia es una preocupación transversal de la que no se ocupa la clase ClienteNatural
                 String nombre = cliente.getString( NOMBRE_CLIENTE );
-                nuevoCliente = new ClienteNatural( nombre );
+                nuevoCliente = new ClienteNatural( nombre, nombre, nombre );
             }
             else
             {
@@ -186,7 +186,7 @@ public class PersistenciaTiquetesJson implements IPersistenciaTiquetes
             // Construir y registrar el tiquete
             Tiquete nuevoTiquete = new Tiquete( codigoTiquete, elVuelo, elCliente, tarifa );
             if( tiqueteUsado )
-                nuevoTiquete.marcarComoUsado( );
+                nuevoTiquete.marcarUsado( );
             GeneradorTiquetes.registrarTiquete( nuevoTiquete );
         }
     }
@@ -208,7 +208,7 @@ public class PersistenciaTiquetesJson implements IPersistenciaTiquetes
             jTiquete.put( CODIGO_RUTA, tiquete.getVuelo( ).getRuta( ).getCodigoRuta( ) );
             jTiquete.put( FECHA, tiquete.getVuelo( ).getFecha( ) );
             jTiquete.put( TARIFA, tiquete.getTarifa( ) );
-            jTiquete.put( USADO, tiquete.esUsado( ) );
+            jTiquete.put( USADO, tiquete.isUsado( ) );
             jTiquete.put( CLIENTE, tiquete.getCliente( ).getIdentificador( ) );
 
             jTiquetes.put( jTiquete );

@@ -12,7 +12,55 @@ import uniandes.dpoo.aerolinea.exceptions.AeropuertoDuplicadoException;
  */
 public class Aeropuerto
 {
-    // TODO completar
+	  private static final double RADIO_TERRESTRE = 6371.0;
+	    private static final Set<String> CODIGOS_REGISTRADOS = new HashSet<>();
+
+	    private final String codigo;
+	    private String nombre;
+	    private double latitud;
+	    private double longitud;
+
+	    public Aeropuerto(String codigo, String nombre, double latitud, double longitud) throws AeropuertoDuplicadoException
+	    {
+	        if (codigo == null || codigo.isBlank())
+	            throw new IllegalArgumentException("Codigo invalido");
+
+	        String cod = codigo.trim().toUpperCase();
+	        synchronized (CODIGOS_REGISTRADOS) {
+	            if (CODIGOS_REGISTRADOS.contains(cod))
+	                throw new AeropuertoDuplicadoException(cod);
+	            CODIGOS_REGISTRADOS.add(cod);
+	        }
+
+	        this.codigo = cod;
+	        this.nombre = nombre;
+	        this.latitud = latitud;
+	        this.longitud = longitud;
+	    }
+
+	    public String getCodigo() { return codigo; }
+	    public String getNombre() { return nombre; }
+	    public double getLatitud() { return latitud; }
+	    public double getLongitud() { return longitud; }
+
+	    public void setNombre(String nombre) { this.nombre = nombre; }
+	    public void setLatitud(double latitud) { this.latitud = latitud; }
+	    public void setLongitud(double longitud) { this.longitud = longitud; }
+
+	    public static int calcularDistancia1(Aeropuerto a1, Aeropuerto a2)
+	    {
+	        double lat1 = Math.toRadians(a1.getLatitud());
+	        
+	        double lon1 = Math.toRadians(a1.getLongitud());
+	        double lat2 = Math.toRadians(a2.getLatitud());
+	        double lon2 = Math.toRadians(a2.getLongitud());
+
+	        double dx = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
+	        double dy = (lat2 - lat1);
+
+	        double distancia = Math.sqrt(dx * dx + dy * dy) * RADIO_TERRESTRE;
+	        return (int) Math.round(distancia);
+	    }
     
 
     /**

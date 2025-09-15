@@ -1,0 +1,17 @@
+package uniandes.dpoo.aerolinea.modelo.tarifas;
+
+
+
+
+import uniandes.dpoo.aerolinea.modelo.Ruta;
+
+
+
+
+
+public class CalculadoraTemporadaAlta extends CalculadoraTarifas {
+
+	public int calcularTarifa(Ruta ruta, String fecha) {
+        return 300; 
+    }
+}
